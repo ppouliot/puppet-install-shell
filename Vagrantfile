@@ -43,7 +43,13 @@ Vagrant.configure("2") do |config|
     xenial_puppet_agent.vm.provision "shell", path: "install_puppet_agent.sh"
     xenial_puppet_agent.vm.provision "shell", inline: "puppet --version"
   end
-
+  
+  config.vm.define "bionic_puppet_agent" do |bionic_puppet_agent|
+    xenial_puppet_agent.vm.box = "ubuntu/bionic64"
+    xenial_puppet_agent.vm.provision "shell", path: "install_puppet_agent.sh"
+    xenial_puppet_agent.vm.provision "shell", inline: "puppet --version"
+  end
+  
   config.vm.define "fedora23_puppet_agent" do |fedora23_puppet_agent|
     fedora23_puppet_agent.vm.box = "fedora/23-cloud-base"
     fedora23_puppet_agent.vm.provision "shell", path: "install_puppet_agent.sh", args: "-v 4.3.1"
